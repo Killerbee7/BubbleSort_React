@@ -1,86 +1,77 @@
 import React from "react";
-import { Component } from "react";
-import "./App.css";
+import { useState} from "react";
+import "./App.css"
 
-class App extends Component {
-  state = {
-    text: "",
-    reverse: "",
-    result: "",
+
+export default 
+
+function Bubblesort() {
+  const [state, setState] = useState({
+    inputNumber: [],
+    resultNum: [],
+  });
+
+  
+
+  const updatedinputNumber = (e) => {
+    
+    let newInputArray = e.target.value.split("");
+    setState({ ...state, inputNumber: newInputArray });
   };
+  const bubbleSort = (arr) => {
+    let newArr = [...arr];
+    let flag = true;
+    while (flag) {
+      flag=false
+      for (let i = 0; i < newArr.length - 1; i++) {
+        if (newArr[i] > newArr[i + 1]) {
+          [newArr[i], newArr[i + 1]] = [newArr[i + 1], newArr[i]];
+          flag = true;
 
-  textHandler = (e) => {
-    e.preventDefault();
-    this.setState({
-      text: e.target.value,
-    });
-  };
-
-  pallCheckHandler = (e) => {
-    e.preventDefault();
-
-    let re = /[^\w|_]/g;
-    let inputText = this.state.text.split("");
-    let revText = inputText
-      .reverse(inputText)
-      .join("")
-      .replace(re, "")
-      .toLowerCase();
-
-    let result = this.state.text.replace(re, "").toLowerCase() === revText;
-
-    if (result) {
-      this.setState({
-        result: "The text is a Palindrome.",
-        reverse: revText,
-      });
-    } else {
-      this.setState({
-        result: "The text is NOT a Palindrome.",
-        reverse: revText,
-      });
+        }
+        console.log(state.resultNum)
+      }
     }
-  };
 
-  reloadWindow = () => {
-    window.location.reload();
+    setState({ ...state, resultNum: newArr });
   };
-  render() {
+{
     return (
       <div className="container">
         <header>
-          <h1>Palindrome Checkers</h1>
+          <h1>Bubble Sort</h1>
         </header>
         <div className="app">
           <div className="inputs">
-            <form onSubmit={this.pallCheckHandler}>
+            
               <div>
                 <input
-                  type="text"
-                  id="input_text"
-                  onChange={this.textHandler}
-                  placeholder="Input your text..."
+                  type="number"
+                  id="input_number"
+                  onChange={updatedinputNumber}
+                  placeholder="Input number 0-9"
                 />
               </div>
               <button
                 type="submit"
                 id="submit_check"
-                onClick={this.pallCheckHandler}
+                onClick={() => {
+                  bubbleSort(state.inputNumber);
+                }}
               >
                 Check
               </button>
 
-              <button onClick={this.reloadWindow}>Refresh</button>
-            </form>
+              
+            
             <div className="result_area">
               <h3>
-                Your Text: <span>{this.state.text}</span>{" "}
+                Your Text: <span>{state.inputNumber}</span>{" "}
               </h3>
-              <h3>
-                Reversed Text: <span>{this.state.reverse} </span>
-              </h3>
+              <h2>Result:</h2>
+              <h3 className="result_text"><span>{state.resultNum}</span></h3>
 
-              <p className="result_text">{this.state.result}</p>
+              
             </div>
           </div>
           <div className="footer">
@@ -97,4 +88,4 @@ class App extends Component {
   }
 }
 
-export default App;
+

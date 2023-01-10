@@ -9,6 +9,10 @@ body{
     background-color: pink;
 }
 
+h2{
+margin-left: 10px;
+  margin-top: 1rem;
+}
 
 .app{
    
@@ -62,7 +66,7 @@ input {
 
 /* CSS for buttons */
 button {
-    margin-left: 6rem;
+    margin-left: 12rem;
     margin-right: 0;
     margin-top: 20px;
     width: 6.25rem;
